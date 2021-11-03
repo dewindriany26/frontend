@@ -7,7 +7,8 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-import axios from "@/axios.js"
+import axios from "@/axios.js";
+import state from "../state";
 
 export default {
     setChatSearchQuery({ commit }, query){
@@ -23,11 +24,19 @@ export default {
     // API CALLS
     sendChatMessage({ getters, commit, dispatch }, payload) {
       return new Promise((resolve, reject) => {
-        axios.post("/api/apps/chat/msg", {payload: payload})
+        axios.post("apps/chat/msg", {payload: payload})
           .then((response) => {
+            console.log(response.data);
             payload.chatData = getters.chatDataOfUser(payload.id)
             if(!payload.chatData) { dispatch("fetchChatContacts") }
             commit('SEND_CHAT_MESSAGE', payload)
+            resolve(response)
+          })
+          .catch((error) => { reject(error) })
+
+          axios.post("apps/chat/msg", {payload: sendmsg})
+          .then((response) => {
+
             resolve(response)
           })
           .catch((error) => { reject(error) })
@@ -35,9 +44,9 @@ export default {
     },
 
     // Get contacts from server. Also change in store
-    fetchContacts({ commit }) {
+    fetchContacts({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get("/api/apps/chat/contacts", {params: {q: ""}})
+        axios.get("/apps/chat/contacts", {params: {q: id}})
           .then((response) => {
             commit('UPDATE_CONTACTS', response.data)
             resolve(response)
@@ -47,9 +56,9 @@ export default {
     },
 
     // Get chat-contacts from server. Also change in store
-    fetchChatContacts({ commit }) {
+    fetchChatContacts({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get("/api/apps/chat/chat-contacts", {params: {q: ""}})
+        axios.get("/apps/chat/contacts", {params: {q: id}})
           .then((response) => {
             commit('UPDATE_CHAT_CONTACTS', response.data)
             resolve(response)
@@ -59,9 +68,9 @@ export default {
     },
 
     // Get chats from server. Also change in store
-    fetchChats({ commit }) {
+    fetchChats({ commit }, id) {
       return new Promise((resolve, reject) => {
-        axios.get("/api/apps/chat/chats")
+        axios.get("api/apps/chat/chats", {params: {q: id}})
           .then((response) => {
             commit('UPDATE_CHATS', response.data)
             resolve(response)

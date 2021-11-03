@@ -193,7 +193,8 @@ export default {
           'isSent'      : true,
           'isSeen'      : false,
         },
-        'id': this.activeChatUser
+        'id': this.activeChatUser,
+        'isUser' : JSON.parse(localStorage.userCredentials).user.id,
       }
       this.$store.dispatch('chat/sendChatMessage', payload)
       this.typedMessage = ''
@@ -223,9 +224,9 @@ export default {
   },
   created() {
     this.$store.registerModule('chat', moduleChat)
-    this.$store.dispatch('chat/fetchContacts')
-    this.$store.dispatch('chat/fetchChatContacts')
-    this.$store.dispatch('chat/fetchChats')
+    this.$store.dispatch('chat/fetchContacts', JSON.parse(localStorage.userCredentials).role)
+    this.$store.dispatch('chat/fetchChatContacts', JSON.parse(localStorage.userCredentials).role)
+    this.$store.dispatch('chat/fetchChats', JSON.parse(localStorage.userCredentials).user.id)
     this.setSidebarWidth()
   },
   beforeDestroy: function() {

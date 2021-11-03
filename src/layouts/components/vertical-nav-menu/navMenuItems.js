@@ -82,11 +82,24 @@ const menuDosen =  [
         i18n: "Tugas Masuk",
       },
       {
-        url: "/dosen/chat",
-        name: "Chat",
-        slug: "app-user-list",
-        icon: "MessageCircleIcon",
-        i18n: "Chat",
+        url: null,
+        name: "Media",
+        icon: "AirplayIcon",
+        i18n: "Media",
+        submenu: [
+          {
+            url: '/dosen/chat',
+            name: "Chat",
+            slug: "chat",
+            i18n: "Chat",
+          },
+          {
+            url: '/apps/user/user-view/268',
+            name: "Video Conference",
+            slug: "app-user-view",
+            i18n: "Video Conference",
+          },
+        ]
       },
     ]
   },
@@ -122,11 +135,24 @@ const menuAdmin =  [
         i18n: "Mahasiswa",
       },
       {
-        url: "/admin/chat",
-        name: "Chat",
-        slug: "chat",
-        icon: "MessageCircleIcon",
-        i18n: "Chat",
+        url: null,
+        name: "Media",
+        icon: "AirplayIcon",
+        i18n: "Media",
+        submenu: [
+          {
+            url: '/admin/chat',
+            name: "Chat",
+            slug: "chat",
+            i18n: "Chat",
+          },
+          {
+            url: '/apps/user/user-view/268',
+            name: "Video Conference",
+            slug: "app-user-view",
+            i18n: "Video Conference",
+          },
+        ]
       },
     ]
   },

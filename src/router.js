@@ -287,6 +287,15 @@ const router = new Router({
                     rule: 'editor',
                 }
             },
+            {
+              path: '/dosen/chat',
+              name: 'chat',
+              component: () => import('./views/apps/chat/Chat.vue'),
+              meta: {
+                  rule: 'editor',
+                  no_scroll: true,
+              }
+            },
           ],
         },
 
@@ -311,6 +320,15 @@ const router = new Router({
                 meta: {
                     rule: 'editor',
                 }
+            },
+            {
+              path: '/admin/chat',
+              name: 'chat',
+              component: () => import('./views/apps/chat/Chat.vue'),
+              meta: {
+                  rule: 'editor',
+                  no_scroll: true,
+              }
             },
           ],
         },
